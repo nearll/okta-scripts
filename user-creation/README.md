@@ -1,5 +1,12 @@
 # Scripts for automating creation of Users
 
+You execute the script by running:
+`python3 user_create.py`
+
+The script will ask you for how many members you want to create payloads for.
+_Note: Since all we are doing is creating a data file their is no input
+validation, use at your own risk._
+
 From https://developer.okta.com/docs/reference/api/users/#create-user-with-password
 
 Request example with curl:
