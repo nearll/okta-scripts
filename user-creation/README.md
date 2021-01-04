@@ -2,7 +2,7 @@
 
 From https://developer.okta.com/docs/reference/api/users/#create-user-with-password
 
-Request example:
+Request example with curl:
 ```
 curl -v -X POST \
 -H "Accept: application/json" \
@@ -56,4 +56,58 @@ Response example:
     }
   }
 }
+```
+
+We will be using Postman to automate the creation of the members, you can find
+the link for importing Okta's Postman collection at the link above. To format
+the json properly to create bulk members we will create a file with the
+following format:
+
+```
+[
+  {
+    "profile": {
+      "firstName": "Deckard", 
+      "lastName": "Johnson", 
+      "email": "DeckardJohnson@gmail.com", 
+      "login": "DeckardJohnson@gmail.com", 
+      "mobilePhone": "231-313-1313"
+    }, 
+      "credentials": {
+        "password": {
+          "value":"0ed4e644a72d404fbcabe35718d7db94"
+      }
+    }
+  },
+    "profile": {
+      "firstName": "Deckard", 
+      "lastName": "Johnson", 
+      "email": "DeckardJohnson@gmail.com", 
+      "login": "DeckardJohnson@gmail.com", 
+      "mobilePhone": "231-313-1313"
+    }, 
+      "credentials": {
+        "password": {
+          "value":"0ed4e644a72d404fbcabe35718d7db94"
+      }
+    }
+ ]
+```
+
+Instructions for automating input data with Postman API calls can be found at:
+https://learning.postman.com/docs/running-collections/working-with-data-files/
+
+The script will also output a file in the following format to allow you to
+later login to your member:
+```
+[
+  {
+    "password": "0ed4e644a72d404fbcabe35718d7db94",
+    "username":"DeckardJohnson@gmail.com"
+  },
+  {
+    "password": "79d5c93329194e699d814c24908f3939",
+    "username": "NickShaffer@gmail.com"}
+  }
+]
 ```
