@@ -3,7 +3,9 @@
 You execute the script by running:
 `python3 user_create.py`
 
-The script will ask you for how many members you want to create payloads for.
+The script will ask you for how many members you want to create payloads for in
+the data file.
+
 _Note: Since all we are doing is creating a data file their is no input
 validation, use at your own risk._
 
