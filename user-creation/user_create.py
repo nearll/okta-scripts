@@ -32,37 +32,38 @@ class UserCreation:
         credentials_object["password"] = password_object
         return credentials_object
 
-    def populate_input_file(self, json_object):
-        input_file = open("users.txt", "w+")
-        input_file.write("[")
-        input_file.write(json.dumps(json_object))
-        input_file.write("]")
-        input_file.close()
-        
-    def populate_users_file(self, json_object):
-        input_file = open("users_login.txt", "w+")
-        input_file.write(json.dumps(json_object))
-        input_file.close()
-
+    def populate_file_json(self, json_object, input_file):
+        input_file.write(json.dumps(json_object)) 
 
 def main():
+    number_of_members_to_create = input("How many members do you want to " + 
+    "create? ")
+
     creation = UserCreation()
     activation_data = {}
     testing_data = {}
     full_activation_data = ""
     full_testing_data = ""
-    for i in range(10):
+
+    input_file = open("users.txt", "w")
+    input_file_login = open("users_login.txt", "w")
+    input_file.write("[")
+    input_file_login.write("[")
+    for i in range(int(number_of_members_to_create)):
         activation_data["profile"] = creation.generate_profile()
         activation_data["credentials"] = creation.generate_credentials()
-        testing_data["login"] = activation_data["profile"]["login"]
         testing_data["password"] = activation_data["credentials"]["password"]["value"]
+        testing_data["username"] = activation_data["profile"]["login"]
+        creation.populate_file_json(activation_data, input_file)
+        creation.populate_file_json(testing_data, input_file_login)
+        if ( i < (int(number_of_members_to_create) - 1)):
+            input_file.write(",")
+            input_file_login.write(",")
 
-    creation.populate_input_file(activation_data)
-    creation.populate_users_file(testing_data)
-
-
-    print(json.dumps(activation_data))
-    print(json.dumps(testing_data))
+    input_file.write("]")
+    input_file_login.write("]")
+    input_file.close()
+    input_file_login.close()
 
 if __name__ == "__main__":
     main()
